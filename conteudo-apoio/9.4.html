@@ -1,0 +1,76 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Instalação do Boostrap</h2>
+
+No momento não existe versão de testes para o Bootstrap, então iremos instalá-lo sem a utilização do <strong>@next</strong>:
+
+[code lang="shell"]
+npm install bootstrap --save
+[/code]
+
+<h2>.angular-cli.json</h2>
+
+<p>Nesta versão não temos mais o arquivo <strong>.angular-cli.json</strong>, tendo este sido substituído pelo arquivo <strong>angular.json</strong>, que possui uma estrutura um pouco diferente, mas não entraremos em detalhes sobre sua estrutura agora.</p>
+
+<h3>Caminho relativo</h3>
+
+<p>Na aula é demonstrada a importação do arquivo CSS do Bootstrap utilizando o seguinte caminho:</p>
+
+[code]
+"../node_modules/bootstrap/dist/css/bootstrap.css"
+[/code]
+
+<p>Isso se deve ao fato de que no arquivo <strong>.angular-cli.json</strong> é atribuído o valor <code>src</code> para o atributo <code>root</code>, o que faz com que o caminho relativo seja baseado na pasta <code>src</code> do projeto. Nesta nova versão o valor padrão para o atributo <code>root</code> é uma string vazia, o que signfica que o caminho relativo se baseia no mesmo diretório do arquivo <strong>angular.json</strong></p>
+
+<p>Portanto, para que possamos importar o CSS do Bootstrap utilizamos o seguinte caminho:</p>
+
+[code]
+"node_modules/bootstrap/dist/css/bootstrap.css"
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/ng10/9.4-instalando-a-biblioteca-css-do-bootstrap-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
+
+<hr style="margin: 50px 0">
+
+<h1> Nota para atualização de dependências </h1>
+
+<p> Este documento irá te auxiliar à fazer a aula com a versão mais recente do Angular.  Atualmente a versão mais recente do Angular é a 7 </p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2>
+    1. Dicas de atualização
+</h2>
+Veremos algumas das pequenas mudanças que podemos notar ao implementarmos o código da aula nesse nova versão.
+
+<h3>
+    Instalação do boostrap
+</h3>
+No momento deste documento, não existe versão de testes para o bootstrap, então iremos instalá-lo sem a utilização do comando <strong>@next</strong>:
+
+<code>npm install bootstrap --save</code>
+
+<h3>
+    .angular-cli.json
+</h3>
+
+<p>Nessa versão, não temos mais este arquivo, tendo este sido substituído pelo arquivo <strong>angular.json</strong> que possui uma estrutura um pouco diferente, mas não entraremos em detalhes sobre sua estrutura agora.</p>
+
+<h3>Caminho relativo</h3>
+<p>Na aula é demonstrado a importação do arquivo CSS do bootstrap utilizando o caminho:</p>
+
+<code>"../node_modules/bootstrap/dist/css/bootstrap.css"</code>
+
+<p>Isso se deve ao fato de que no arquivo <strong>.angular-cli.json</strong> é atribuído o valor <strong>src</strong> para o atributo <strong>root</strong>,
+    o que faz com que o caminho relativo seja baseado na pasta <strong>src</strong> do projeto.</p>
+<p>Nessa nova versão o valor padrão para o atributo <strong>root</strong> é uma string vazia, o que signfica que o caminho relativo se baseia no mesmo diretório do arquivo <strong>angular.json</strong></p>
+<p>Portanto, para que possamos importar o CSS do bootstrap sem alterar as configurações do arquivo, precisamos declarar dessa forma:</p>
+<code>"node_modules/bootstrap/dist/css/bootstrap.css"</code>
