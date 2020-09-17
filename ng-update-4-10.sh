@@ -39,7 +39,7 @@ print_info "Instalando o @angular/core@6 e atualizando o codelyzer"
 ng update @angular/core@6 codelyzer
 commit_ammend
 
-print_info "Instalando o rxjs 6"
+print_info "Removendo o rxjs 5"
 npx rxjs-tslint -p src/tsconfig.app.json
 rxjs-5-to-6-migrate -p src/tsconfig.app.json
 npm rm rxjs-compat
