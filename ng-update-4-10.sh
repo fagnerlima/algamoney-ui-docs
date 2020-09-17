@@ -40,9 +40,9 @@ ng update @angular/core@6 codelyzer
 commit_ammend
 
 print_info "Removendo o rxjs 5"
-npx rxjs-tslint -p src/tsconfig.app.json
+# npx rxjs-tslint
 rxjs-5-to-6-migrate -p src/tsconfig.app.json
-npm rm rxjs-compat
+# npm rm rxjs-compat
 commit_ammend
 
 print_info "Migrando a configuração do @angular/cli@1.7.4 para o @angular/cli@6"
@@ -67,5 +67,7 @@ commit_ammend
 
 # ng update
 # npm outdated
+
+print_info "Atualizando demais dependências"
 ng update bootstrap
 commit_ammend
