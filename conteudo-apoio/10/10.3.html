@@ -1,0 +1,67 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Instalação do PrimeNG 10</h2>
+
+<p>Na versão 10 o PrimeNG não faz mais uso da biblioteca <strong>font-awesome</strong>. Foi criada uma biblioteca própria do PrimeNG para substituí-la, que é a <strong>PrimeIcons</strong>. Outra mudança foi a criação da biblioteca <strong>PrimeFlex</strong>, necessária para o uso do grid system do PrimeNG.</p>
+
+<p>Para instalar os componentes do PrimeNG são necessários os seguintes comandos:</p>
+
+[code lang="shell"]
+npm install primeng --save
+npm install primeicons --save
+npm install primeflex --save
+[/code]
+
+<p> Você verá que as dependências foram instaladas com sucesso no arquivo <strong>package.json</strong></p>
+
+[code lang="json"]
+"dependencies": {
+  // ...
+  "primeflex": "^2.0.0",
+  "primeicons": "^4.0.0",
+  "primeng": "^10.0.0"
+}
+[/code]
+
+<h2>Importação das folhas de estilo do PrimeNG 10</h2>
+
+<p>Na aula é mostrado como inserir os estilos do PrimeNG no arquivo <strong>.angular-cli.json</strong>. No Angular 10 o arquivo <strong>.angular-cli.json</strong> foi renomeado para <strong>angular.json</strong>. Houveram mudanças em sua estrutura, porém ainda existe a propriedade <code>styles</code>, onde devemos inserir os valores que estão na documentação do PrimeNG.</p>
+
+<p>Outra diferença é que neste arquivo o atributo "root" é configurado com o valor "" e não com "src", como era no formato antigo. Isso significa que não usaremos "../node_modules/", pois já estamos no diretóio raíz (o mesmo da pasta node_modules). Então devemos usar "node_modules/".</p>
+
+<p>Devido à mudança do atributo "root" do <strong>angular.json</strong> e à inclusão das novas bibliotecas, são necessárias as importações das seguintes folhas de estilo:</p>
+
+[code lang="json"]
+"styles": [
+  // ...
+  "node_modules/primeicons/primeicons.css",
+  "node_modules/primeflex/primeflex.css",
+  "node_modules/primeng/resources/themes/saga-blue/theme.css",
+  "node_modules/primeng/resources/primeng.min.css",
+]
+[/code]
+
+<h2>Importação de módulos do PrimeNG 10</h2>
+
+<p>Os componentes no PrimeNG 10 são configurados como módulos. Uma vez que o PrimeNG está instalado e configurado, módulos e APIs podem ser importados com o padrão de path <code>primeng/{module}</code>. A documentação de cada componente apresenta a sua respectiva importação.</p>
+
+<p>Segue exemplo da documentação do PrimeNG 10:</p>
+
+[code lang="typescript"]
+import {AccordionModule} from 'primeng/accordion'; //accordion and accordion tab
+import {MenuItem} from 'primeng/api';              //api
+[/code]
+
+<p>Nesta aula a alteração que deve ser feita é na importação do <code>TabViewModule</code> no <strong>AppModule</strong>:</p>
+
+[code lang="typescript"]
+import { TabViewModule } from 'primeng/tabview';
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/10.3-criando-o-projeto-do-curso-e-instalando-o-primeng-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
