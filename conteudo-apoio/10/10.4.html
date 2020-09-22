@@ -1,0 +1,99 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Importação de módulos do PrimeNG 10</h2>
+
+<p>Os componentes no PrimeNG 10 são configurados como módulos. Uma vez que o PrimeNG está instalado e configurado, módulos e APIs podem ser importados com o padrão de path <code>primeng/{module}</code>. A documentação de cada componente apresenta a sua respectiva importação.</p>
+
+<p>Segue exemplo da documentação do PrimeNG 10:</p>
+
+[code lang="typescript"]
+import { AccordionModule } from 'primeng/accordion'; // accordion and accordion tab
+import { MenuItem } from 'primeng/api';              // api
+[/code]
+
+<p>Nesta aula as alterações que devem ser feitas no <strong>AppModule</strong> são as seguintes:</p>
+
+[code lang="typescript"]
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+[/code]
+
+<h2>Classes CSS do PrimeNG 10 e do PrimeFlex</h2>
+
+<p>Algumas classes CSS do PrimeNG foram substituídas na versão 10.
+  Anteriormente, por padrão, as classes CSS do PrimeNG tinham o prefixo <code>ui-</code>,
+  passando agora para o prefixo <code>p-</code>.
+  Além do prefixo são necessárias apenas algumas alterações em casos específicos como o da classe <code>ui-g</code>
+  que deve ser substituída pela classe <code>p-grid</code>.</p>
+
+<p>Segue um resumo de algumas alterações:</p>
+
+<table border="1">
+  <thead>
+    <tr>
+      <td><strong>Classe removida</strong></td>
+      <td><strong>Nova classe</strong></td>
+      <td><strong>Observação</strong></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ui-g</code></td>
+      <td><code>p-grid</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>ui-g-x</code></td>
+      <td><code>p-col-x</code></td>
+      <td>x = 1~12</td>
+    </tr>
+    <tr>
+      <td><code>ui-md-x</code></td>
+      <td><code>p-md-x</code></td>
+      <td>x = 1~12</td>
+    </tr>
+    <tr>
+      <td><code>ui-lg-x</code></td>
+      <td><code>p-lg-x</code></td>
+      <td>x = 1~12</td>
+    </tr>
+    <tr>
+      <td><code>ui-fluid</code></td>
+      <td><code>p-fluid</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>ui-button</code></td>
+      <td><code>p-button</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>ui-button-*</code></td>
+      <td><code>p-button-*</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>ui-dropdown</code></td>
+      <td><code>p-dropdown</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>ui-message</code></td>
+      <td><code>p-message</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>ui-message-*</code></td>
+      <td><code>p-messages-*</code></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/10.4-adicionando-o-formulario-de-pesquisa-de-lancamentos-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
