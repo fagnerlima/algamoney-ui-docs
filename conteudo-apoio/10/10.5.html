@@ -1,0 +1,244 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências,
+  mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Angular CDK</h2>
+
+<p>Devido à dependência de outros componentes, será necessário instalar o <strong>Angular CDK</strong> em nosso projeto:</p>
+
+[code lang="shell"]
+npm install @angular/cdk --save
+[/code]
+
+<p>Você verá que a dependência foi instalada com sucesso no seu arquivo <strong>package.json</strong>:</p>
+
+[code lang="json"]
+"dependencies": {
+  //...
+  "@angular/cdk": "^10.0.0",
+  //...
+}
+[/code]
+
+<h2>Componente Table do PrimeNG 10</h2>
+
+<p>O PrimeNG 10 não faz mais uso do componente <strong>DataTable</strong>, tendo sido este substituído na versão 6 pelo componente
+  <strong>Table</strong>.</p>
+
+<h3>Importação do TableModule</h3>
+
+<p>Antes de iniciarmos o desenvolvimento da nossa tabela, precisamos adicionar o módulo correspondente no <strong>AppModule</strong>.</p>
+
+[code lang="typescript"]
+import { TableModule } from 'primeng/table';
+
+//...
+
+imports: [
+  //...
+  TableModule
+],
+//...
+[/code]
+
+<h3>Implementação da tabela</h3>
+
+<p>A utilização do componente <strong>Table</strong> é bastante simples. O componente também possui a propriedade <code>value</code>,
+  porém a forma de exibição das colunas é diferente.</p>
+
+<p>Ele trabalha com o conceito de <strong>templates</strong>, onde podemos definir as seções da nossa tabela e também declarar variáveis.
+  No nosso caso teremos dois templates: <strong>header</strong> e <strong>body</strong>.
+  Vamos definir no <strong>header</strong> os nomes das propriedades que estão no <strong>AppComponent</strong>; no <strong>body</strong>
+  adicionaremos os valores do nosso array.</p>
+
+[code lang="html"]
+&#x3C;div class=&#x22;ui-g&#x22;&#x3E;
+  &#x3C;div class=&#x22;ui-g-12&#x22;&#x3E;
+    &#x3C;p-table [value]=&#x22;lancamentos&#x22;&#x3E;
+      &#x3C;ng-template pTemplate=&#x22;header&#x22;&#x3E;
+        &#x3C;tr&#x3E;
+          &#x3C;th&#x3E;Pessoa&#x3C;/th&#x3E;
+          &#x3C;th&#x3E;Descrição&#x3C;/th&#x3E;
+          &#x3C;th class=&#x22;col-data-header&#x22;&#x3E;Vencimento&#x3C;/th&#x3E;
+          &#x3C;th class=&#x22;col-data-header&#x22;&#x3E;Pagamento&#x3C;/th&#x3E;
+          &#x3C;th class=&#x22;col-valor-header&#x22;&#x3E;Valor&#x3C;/th&#x3E;
+        &#x3C;/tr&#x3E;
+      &#x3C;/ng-template&#x3E;
+      &#x3C;ng-template pTemplate=&#x22;body&#x22; let-lancamento&#x3E;
+        &#x3C;tr&#x3E;
+          &#x3C;td&#x3E;{{ lancamento.pessoa }}&#x3C;/td&#x3E;
+          &#x3C;td&#x3E;{{ lancamento.descricao }}&#x3C;/td&#x3E;
+          &#x3C;td class=&#x22;col-data-content&#x22;&#x3E;{{ lancamento.dataVencimento }}&#x3C;/td&#x3E;
+          &#x3C;td class=&#x22;col-data-content&#x22;&#x3E;{{ lancamento.dataPagamento }}&#x3C;/td&#x3E;
+          &#x3C;td class=&#x22;col-valor-content&#x22;&#x3E;{{ lancamento.valor }}&#x3C;/td&#x3E;
+        &#x3C;/tr&#x3E;
+      &#x3C;/ng-template&#x3E;
+    &#x3C;/p-table&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+[/code]
+
+<p>Para declararmos a variável que será resultado da iteração de nosso array usamos a diretiva <code>let-nome-da-variavel</code>,
+  onde o <code>nome-da-variável</code> será o objeto que utilizaremos para acessar os valores de nosso array.</p>
+
+<p>No exemplo acima utilizamos <code>let-lancamento</code>, portanto cada item do nosso array <code>lancamentos</code>
+  (atributo à propriedade <code>value</code>) poderá ter seus valores acessados por meio da variável <code>lancamento</code>:</p>
+
+[code lang="html"]
+{{ lancamento.pessoa }}
+[/code]
+
+<h3>CSS do Table</h3>
+
+<p>Diferente do <strong>DataTable</strong>, nosso novo componente especifica separadamente as colunas, por cabeçalho e conteúdo.
+  Por esta razão precisaremos alterar o CSS para obtermos o mesmo resultado da aula.</p>
+
+[code lang="css"]
+.col-valor-header {
+  width: 120px;
+}
+
+.col-valor-content {
+  text-align: right;
+}
+
+.col-data-header {
+  width: 120px;
+}
+
+.col-data-content {
+  text-align: center;
+}
+[/code]
+
+<p>Perceba que adicionamos regras CSS para os cabeçalhos e para os conteúdos. Dessa forma conseguimos atingir o resultado esperado.</p>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/10.5-adicionando-uma-tabela-de-dados-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
+
+<!--
+<hr>
+
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+
+<h2>
+    1. Novo componente
+</h2>
+
+<p> Na versão atual, o PrimeNG não faz mais uso do componente DataTable, sendo necessário o uso do componente Table. </p>
+<p> Devido a dependência de outros componentes, será necessário instalar uma nova dependência para nosso projeto: </p>
+
+[code]
+npm install @angular/cdk --save
+[/code]
+
+<p> Você verá que a dependência foi instalada com sucesso, pelo seu arquivo package.json</p>
+
+[code lang="xml"]
+"dependencies": {
+    //...
+    "@angular/cdk": "^8.0.0",
+    //...
+}
+[/code]
+
+<h2>
+    2. Usando Table
+</h2>
+
+<h3> Adicionando entrada no app.module </h3>
+
+<p> Antes de começarmos a desenvolver nossa tabela, precisamos antes adicionar o módulo correspondente no arquivo app.module.ts </p>
+
+[code lang="javascript"]
+import {TableModule} from 'primeng/table';
+
+//...
+
+imports: [
+    //...
+    TableModule
+],
+//...
+[/code]
+
+<h3> Criando a tabela </h3>
+
+<p> A utilização do componente Table também é bem simples. </p>
+<p> O componente também possui a propriedade "value", porém a forma como exibir as colunas é diferente. </p>
+<p> Ele trabalha com o cenceito de templates, onde podemos definir as seções da nossa tabela e também declarar variáveis. </p>
+<p> No nosso caso teremos dois templates: "header" e "body". Vamos definir nosso cabeçalho com os nomes das propriedades que está em nosso app.component.ts e o body para os valores do nosso array. </p>
+
+
+[code lang="html"]
+&#x3C;div class=&#x22;ui-g&#x22;&#x3E;
+    &#x3C;div class=&#x22;ui-g-12&#x22;&#x3E;
+    &#x3C;p-table [value]=&#x22;lancamentos&#x22;&#x3E;
+        &#x3C;ng-template pTemplate=&#x22;header&#x22;&#x3E;
+            &#x3C;tr&#x3E;
+                &#x3C;th&#x3E;Pessoa&#x3C;/th&#x3E;
+                &#x3C;th&#x3E;Descricao&#x3C;/th&#x3E;
+                &#x3C;th class=&#x22;col-data-header&#x22;&#x3E;Vencimento&#x3C;/th&#x3E;
+                &#x3C;th class=&#x22;col-data-header&#x22;&#x3E;Pagamento&#x3C;/th&#x3E;
+                &#x3C;th class=&#x22;col-valor-header&#x22;&#x3E;Valor&#x3C;/th&#x3E;
+            &#x3C;/tr&#x3E;
+        &#x3C;/ng-template&#x3E;
+        &#x3C;ng-template pTemplate=&#x22;body&#x22; let-lancamento&#x3E;
+            &#x3C;tr&#x3E;
+                &#x3C;td&#x3E;{{lancamento.pessoa}}&#x3C;/td&#x3E;
+                &#x3C;td&#x3E;{{lancamento.descricao}}&#x3C;/td&#x3E;
+                &#x3C;td class=&#x22;col-data-content&#x22;&#x3E;{{lancamento.dataVencimento}}&#x3C;/td&#x3E;
+                &#x3C;td class=&#x22;col-data-content&#x22;&#x3E;{{lancamento.dataPagamento}}&#x3C;/td&#x3E;
+                &#x3C;td class=&#x22;col-valor-content&#x22;&#x3E;{{lancamento.valor}}&#x3C;/td&#x3E;
+            &#x3C;/tr&#x3E;
+        &#x3C;/ng-template&#x3E;
+    &#x3C;/p-table&#x3E;
+    &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+[/code]
+
+<p> Para declararmos a variável que será resultado da iteração de nosso array, usamos a diretiva let-nome-da-variavel. Onde o nome da variável será o objeto que utilizaremos para acessar os valores de nosso array. </p>
+<p> No exemplo acima, utilizamos "let-lancamento", portanto a cada item do nosso array "lancamentos" (atributo à propriedade "value"), poderemos acessar os valores utilizando interpolação. </p>
+<p> Ex.: </p>
+<code>{{lancamento.pessoa}} </code>
+<p> Assim estaremos acessando o valor "pessoa" de cada item do nosso array. </p>
+
+<h2>
+    3. Estilos
+</h2>
+
+<p> Diferente do DataTable, nosso novo componente especifica separadamente as colunas, por cabeçalho e conteúdo, por isso precisaremos alterar os estilos para obtermos o mesmo resultado da aula. </p>
+
+[code lang="css"]
+.col-valor-header {
+    width: 120px;
+}
+.col-valor-content {
+    text-align: right;
+}
+
+.col-data-header {
+    width: 120px;
+}
+
+.col-data-content {
+    text-align: center;
+}
+[/code]
+
+<p>Perceba que criamos estilos para os cabeçalhos e estilos para os conteúdos. Dessa forma conseguimos atingir o resultado esperado.</p>
+-->
