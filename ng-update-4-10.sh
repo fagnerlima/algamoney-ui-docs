@@ -73,9 +73,20 @@ print_info "Migrando a configuração do @angular/core 9 para o 10"
 ng update @angular/core --migrate-only --from 9 --to 10
 commit_ammend
 
+print_info "Instalando o @angular/cdk"
+npm install @angular/cdk --save
+commit_ammend
+
 # ng update
 # npm outdated
 
-print_info "Atualizando demais dependências"
-ng update bootstrap
+# print_info "Atualizando o Bootstrap"
+# ng update bootstrap
+# commit_ammend
+
+print_info "Instalando o PrimeNG 10"
+ng update primeng
+commit_ammend
+npm install primeicons primeflex --save
+npm rm font-awesome
 commit_ammend
