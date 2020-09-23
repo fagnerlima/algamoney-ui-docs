@@ -1,0 +1,150 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências,
+  mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Customizando o cabeçalho da tabela</h2>
+
+<p>Como vimos anteriormente, o componente Table já trabalha baseado em templates, portanto o trabalho de customizar o cabeçalho ou o
+  próprio conteúdo fica bem mais simples.</p>
+
+<p>Como feito no início da aula, para adicionarmos um botão no cabeçalho da nossa tabela, precisaríamos apenas adicioná-lo dentro da tag <code>th</th></code>:</p>
+
+[code lang="html"]
+&#x3C;p-table [value]=&#x22;lancamentos&#x22;&#x3E;
+  &#x3C;ng-template pTemplate=&#x22;header&#x22;&#x3E;
+    &#x3C;tr&#x3E;
+      &#x3C;!-- ... --&#x3E;
+      &#x3C;th class=&#x22;col-valor-header&#x22;&#x3E; &#x3C;button pButton label=&#x22;Teste&#x22;&#x3E;&#x3C;/button&#x3E;&#x3C;/th&#x3E;
+      &#x3C;!-- ... --&#x3E;
+    &#x3C;/tr&#x3E;
+  &#x3C;/ng-template&#x3E;
+  &#x3C;ng-template pTemplate=&#x22;body&#x22; let-lancamento&#x3E;
+    &#x3C;tr&#x3E;
+      &#x3C;!-- ... --&#x3E;
+    &#x3C;/tr&#x3E;
+  &#x3C;/ng-template&#x3E;
+&#x3C;/p-table&#x3E;
+[/code]
+
+<h2>CSS da tabela</h2>
+
+<p>Para aplicar o estilo condicional, também será bem mais fácil, pois já estamos utilizando template. Portanto, já temos o componente
+  do body e temos a variável <code>lancamento</code>.</p>
+
+<p>Neste caso, aplicaremos o estilo condicional da mesma forma, porém direto na tag <code>td</code>.</p>
+
+<p>Claro que é possível também colocarmos uma tag <code>span</code> para o mesmo efeito:</p>
+
+
+[code lang="html"]
+&#x3C;td class=&#x22;col-valor-content&#x22; [ngStyle]=&#x22;{ color: lancamento.tipo === &#x27;DESPESA&#x27; ? &#x27;red&#x27; : &#x27;blue&#x27;}&#x22;&#x3E;{{lancamento.valor}}&#x3C;/td&#x3E;
+
+&#x3C;!-- ou... --&#x3E;
+
+&#x3C;td class=&#x22;col-valor-content&#x22; [style.color]=&#x22;lancamento.tipo === &#x27;DESPESA&#x27; ? &#x27;red&#x27; : &#x27;blue&#x27;&#x22;&#x3E;{{lancamento.valor}}&#x3C;/td&#x3E;
+
+&#x3C;!-- ou... --&#x3E;
+
+&#x3C;td class=&#x22;col-valor-content&#x22;&#x3E;
+  &#x3C;span [style.color]=&#x22;lancamento.tipo === &#x27;DESPESA&#x27; ? &#x27;red&#x27; : &#x27;blue&#x27;&#x22;&#x3E;{{lancamento.valor}} &#x3C;/span&#x3E;
+&#x3C;/td&#x3E;
+[/code]
+
+<h2>Ícones</h2>
+
+<p>Na versão mostrada na aula, utilizamos <strong>font-awesome</strong> para nossos ícones, mas como falamos anteriormente,
+  o PrimeNG agora nos fornece sua própria biblioteca de ícones.</p>
+
+<p>Para usá-la, não muda muita coisa. Precisamos apenas adptar o prefixo <strong>fa</strong> para <strong>pi</strong>.
+  Além disso, antes do nome do ícone devemos colocar o prefixo <strong>pi</strong> de forma isolada:</p>
+
+[code lang="html"]
+&#x3C;td class=&#x22;col-acoes&#x22;&#x3E;
+  &#x3C;a pButton icon=&#x22;pi pi-pencil&#x22;&#x3E;&#x3C;/a&#x3E;
+  &#x3C;button pButton icon=&#x22;pi pi-trash&#x22;&#x3E;&#x3C;/button&#x3E;
+&#x3C;/td&#x3E;
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/10.6-customizando-colunas-com-ng-template-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
+
+<!--
+<hr>
+
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+
+<h2>
+    1. Customizando cabeçalho
+</h2>
+
+<p> Como vimos anteriormente, o componente Table já trabalha baseado em templates, portanto o trabalho de customizar o cabeçalho ou o próprio conteúdo fica bem mais simples </p>
+<p> Como feito no início da aula, para adicionarmos um botão no cabeçalho da nossa tabela, precisaríamos apenas adicioná-lo dentro da tag "th": </p>
+
+[code lang="html"]
+&#x3C;p-table [value]=&#x22;lancamentos&#x22;&#x3E;
+    &#x3C;ng-template pTemplate=&#x22;header&#x22;&#x3E;
+        &#x3C;tr&#x3E;
+            &#x3C;!-- ... --&#x3E;
+            &#x3C;th class=&#x22;col-valor-header&#x22;&#x3E; &#x3C;button pButton label=&#x22;Teste&#x22;&#x3E;&#x3C;/button&#x3E;&#x3C;/th&#x3E;
+            &#x3C;!-- ... --&#x3E;
+        &#x3C;/tr&#x3E;
+    &#x3C;/ng-template&#x3E;
+    &#x3C;ng-template pTemplate=&#x22;body&#x22; let-lancamento&#x3E;
+        &#x3C;tr&#x3E;
+            &#x3C;!-- ... --&#x3E;
+        &#x3C;/tr&#x3E;
+    &#x3C;/ng-template&#x3E;
+&#x3C;/p-table&#x3E;
+[/code]
+
+<h2>
+    2. Estilos
+</h2>
+
+<p> Para aplicar o estilo condicional, também será bem mais fácil, pois já estamos utilizando template. Portanto, já temos o componente do body e temos a variável lancamento. </p>
+<p> Neste caso, aplicaremos o estilo condicional da mesma forma, porém direto na tag "td". </p>
+<p> Claro que é possível também colocarmos uma tag "span" para o mesmo efeito: </p>
+
+
+[code lang="html"]
+&#x3C;td class=&#x22;col-valor-content&#x22; [ngStyle]=&#x22;{ color: lancamento.tipo === &#x27;DESPESA&#x27; ? &#x27;red&#x27; : &#x27;blue&#x27;}&#x22;&#x3E;{{lancamento.valor}}&#x3C;/td&#x3E;
+
+&#x3C;!-- ou... --&#x3E;
+
+&#x3C;td class=&#x22;col-valor-content&#x22; [style.color]=&#x22;lancamento.tipo === &#x27;DESPESA&#x27; ? &#x27;red&#x27; : &#x27;blue&#x27;&#x22;&#x3E;{{lancamento.valor}}&#x3C;/td&#x3E;
+
+&#x3C;!-- ou... --&#x3E;
+
+&#x3C;td class=&#x22;col-valor-content&#x22;&#x3E;
+    &#x3C;span [style.color]=&#x22;lancamento.tipo === &#x27;DESPESA&#x27; ? &#x27;red&#x27; : &#x27;blue&#x27;&#x22;&#x3E;{{lancamento.valor}} &#x3C;/span&#x3E;
+&#x3C;/td&#x3E;
+[/code]
+
+<h2>
+    3. Ícones
+</h2>
+
+<p> Na versão mostrada na aula, utilizamos font-awsome para nossos ícones, mas como falamos anteriormente, o PrimeNG agora nos fornece sua própria biblioteca de ícones. </p>
+<p> Para usá-la, não muda muita coisa. Precisamos apenas adptar o prefixo "fa" para "pi". E antes do nome do ícone, também devemos colocar o prefixo "pi" de forma isolada: </p>
+
+[code lang="html"]
+&#x3C;td class=&#x22;col-acoes&#x22;&#x3E;
+    &#x3C;a pButton icon=&#x22;pi pi-pencil&#x22;&#x3E;&#x3C;/a&#x3E;
+    &#x3C;button pButton icon=&#x22;pi pi-trash&#x22;&#x3E;&#x3C;/button&#x3E;
+&#x3C;/td&#x3E;
+[/code]
+-->
