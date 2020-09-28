@@ -1,0 +1,118 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências,
+  mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>PrimeNG 10</h2>
+
+<h3>Tabela responsiva</h3>
+
+<p>Para tornar nossa tabela responsiva no PrimeNG 10, primeiramente utilizamos o mesmo atributo mostrado na aula: <code>responsive</code>.
+  Além disso, precisamos adicionar a informação de cabeçalho no template <code>body</code>, pois ele que será exibido nos dispositivos
+  de menor resolução.</p>
+
+<p>O cabeçaho no corpo da tabela deve ser adicionado com a classe CSS <code>p-column-title</code> da seguinte forma:</p>
+
+[code lang="html"]
+<ng-template pTemplate="body" let-lancamento>
+  <tr>
+    <td>
+      <span class="p-column-title">Pessoa</span>
+      {{ lancamento.pessoa }}
+    </td>
+    <!-- ... -->
+  </tr>
+</ng-template>
+[/code]
+
+<p>Segue o código completo da tabela responsiva:</p>
+
+[code lang="html"]
+<p-table [value]="lancamentos" [paginator]="true" [rows]="2"
+    [responsive]="true">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Pessoa</th>
+      <th>Descrição</th>
+      <th class="col-data-header">Vencimento</th>
+      <th class="col-data-header">Pagamento</th>
+      <th class="col-valor-header">Valor</th>
+      <th class="col-acoes-header"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-lancamento>
+    <tr>
+      <td>
+        <span class="p-column-title">Pessoa</span>
+        {{ lancamento.pessoa }}
+      </td>
+      <td>
+        <span class="p-column-title">Descrição</span>
+        {{ lancamento.descricao }}
+      </td>
+      <td class="col-data">
+        <span class="p-column-title">Vencimento</span>
+        {{ lancamento.dataVencimento }}
+      </td>
+      <td class="col-data">
+        <span class="p-column-title">Pagamento</span>
+        {{ lancamento.dataPagamento }}
+      </td>
+      <td class="col-valor">
+        <span class="p-column-title">Valor</span>
+        <span [style.color]="lancamento.tipo === 'DESPESA' ? 'red' : 'blue'">{{ lancamento.valor }}</span>
+      </td>
+      <td class="col-acoes">
+        <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+        <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+[/code]
+
+<p>Além disso, precisamos ajustar nossas regras CSS para tabelas para que elas não sejam aplicadas em dispositivos de menor resolução,
+  pois não precisamos, por exemplo, centralizar informações da tabela, pois todas elas serão exibidas com alinhamento à esquerda.
+  Para ajustar o CSS faremos uso de media query com <code>min-width: 40em</code>, que é o valor de resolução que o PrimeNG utiliza
+  para alterar o layout da tabela para dispositivos de menor resolução.</p>
+
+<p>Segue o código completo das regras CSS da tabela:</p>
+
+[code lang="css"]
+@media (min-width: 40em) {
+  .col-valor-header {
+    width: 120px;
+  }
+
+  .col-valor {
+    text-align: right !important;
+  }
+
+  .col-data-header {
+    width: 120px;
+  }
+
+  .col-data {
+    text-align: center !important;
+  }
+
+  .col-acoes-header {
+    width: 115px;
+  }
+
+  .col-acoes {
+    width: 115px;
+    text-align: center !important;
+  }
+
+  .col-acoes .p-button {
+    margin: 1px;
+  }
+}
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/10.9-colocando-a-tabela-de-dados-responsiva-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
