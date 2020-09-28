@@ -35,8 +35,13 @@ npm install @angular/cli@6 --save-dev
 git add .
 git commit -m "${COMMIT_MESSAGE}"
 
-print_info "Instalando o @angular/core@6 e atualizando o codelyzer"
-ng update @angular/core@6 codelyzer
+print_info "Instalando o Angular 6 e atualizando o codelyzer"
+ng update @angular/cli@6 @angular/core@6 \
+  @angular/compiler@6 \
+  @angular/compiler-cli@6 \
+  @angular/platform-browser-dynamic@6 \
+  typescript@2.9 \
+  codelyzer
 commit_ammend
 
 print_info "Removendo o rxjs 5"
