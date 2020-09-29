@@ -1,0 +1,24 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências,
+  mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Atributo exibindoMenu</h2>
+
+<p>O atributo <code>exibindoMenu</code> deve ser criado no arquivo <strong>navbar.component.ts</strong>, pois o compilador do Angular
+  acusa a inexistência deste atributo no componente:</p>
+
+[code lang="typescript"]
+export class NavbarComponent implements OnInit {
+
+  exibindoMenu = false;
+
+  // ...
+}
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/10.12-adicionando-menu-intercambiavel-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
