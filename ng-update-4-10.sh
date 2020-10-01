@@ -70,14 +70,6 @@ print_info "Instalando o Angular 10"
 ng update @angular/core @angular/cli
 commit_ammend
 
-print_info "Migrando a configuração do @angular/cli 9 para o 10"
-ng update @angular/cli --migrate-only --from 9 --to 10
-commit_ammend
-
-print_info "Migrando a configuração do @angular/core 9 para o 10"
-ng update @angular/core --migrate-only --from 9 --to 10
-commit_ammend
-
 print_info "Instalando o @angular/cdk"
 npm install @angular/cdk --save
 commit_ammend
