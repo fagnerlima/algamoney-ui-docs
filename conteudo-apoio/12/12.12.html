@@ -1,0 +1,39 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Bootstrap</h2>
+
+<p>Algumas classes de validação do Bootstrap foram removidas e outras alteradas.
+  As classes <code>form-control-label</code> e <code>form-control-feedback</code>
+  foram removidas e a validação para o label agora precisa ser customizada.</p>
+
+<p>A classe <code>has-danger</code> também foi removida, porém temos agora as classes <code>is-valid</code> e <code>is-invalid</code>,
+  sendo <code>is-invalid</code> o que procuramos para substituir a classe <code>has-danger</code>.</p>
+
+<p>Para o feedback também existem duas outras classes: <code>valid-feedback</code> e <code>invalid-feedback</code>.
+  Utilizaremos a <code>invalid-feedback</code>.</p>
+
+[code lang="html"]
+&#x3C;form autocomplete=&#x22;off&#x22; #usuarioForm=&#x22;ngForm&#x22; (ngSubmit)=&#x22;salvar(usuarioForm)&#x22;&#x3E;
+    &#x3C;div class=&#x22;form-group&#x22;&#x3E;
+        &#x3C;label&#x3E;Nome&#x3C;/label&#x3E;
+        &#x3C;input type=&#x22;text&#x22; class=&#x22;form-control&#x22; name=&#x22;primeiroNome&#x22; [(ngModel)]=&#x22;cliente.nome&#x22; required minlength=&#x22;10&#x22; #nome=&#x22;ngModel&#x22;  [class.is-invalid]=&#x22;nome.invalid &#x26;&#x26; nome.touched&#x22;&#x3E;
+        &#x3C;div *ngIf=&#x22;nome.hasError(&#x27;required&#x27;) &#x26;&#x26; nome.touched&#x22; class=&#x22;invalid-feedback&#x22;&#x3E;
+            Informe um nome
+        &#x3C;/div&#x3E;
+        &#x3C;div *ngIf=&#x22;nome.hasError(&#x27;minlength&#x27;) &#x26;&#x26; nome.touched&#x22; class=&#x22;invalid-feedback&#x22;&#x3E;
+            O nome deve ser completo
+        &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+&#x3C;/form&#x3E;
+[/code]
+
+<p>Como visto acima, precisamos apenas informar as classes <code>is-invalid</code> para os componentes
+  <code>form-control</code> e <code>invalid-feedback</code> para os componentes de feedback.</p>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/12.12-estilizando-os-campos-invalidos-com-bootstrap-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
