@@ -1,0 +1,46 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2> 1. Criação do serviço </h2>
+
+<p> Como vimos anteriormente, utilizamos o parametro "skipTests", ao invés de "spec=false" para que não seja gerado o arquivo de testes. </p>
+
+[code]
+ng g s lancamentos/lancamento --skipTests
+[/code]
+
+<h2> 2. Importando o módulo </h2>
+<p> Não podemos nos esquecer que precisamos utilizar o módulo HttpClientModule agora, portanto no arquivo app.module.ts, precisamos definí-lo na seção "imports" </p>
+
+[code lang="javascript"]
+//...
+import { HttpClientModule } from '@angular/common/http';
+//...
+imports: [
+  //...
+  HttpClientModule
+],
+[/code]
+
+<h2> 3. Resposta do serviço </h2>
+
+<p> Pelo fato do componente HttpClient já retornar o conteúdo da resposta em formato JSON, não precisamos nos preocupar em transformá-lo, precisamos somente retornar a propriedade "content". </p>
+<p> Outro detalhe, é que para os métodos de HttpClient, precisaremos usar HttpHeaders, ao invés de Headers. </p>
+<p> O HttpHeaders se encontra no pacote '@angular/common/http'</p>
+
+[code lang="javascript"]
+pesquisar(): Promise&#x3C;any&#x3E; {
+    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    return this.http.get(`${this.lancamentosUrl}?resumo`, { headers })
+      .toPromise()
+      .then(response => response['content']);
+}
+[/code]

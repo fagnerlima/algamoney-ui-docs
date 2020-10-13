@@ -1,0 +1,44 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Importando o módulo</h2>
+
+<p>Não podemos nos esquecer que precisamos utilizar o <strong>HttpClientModule</strong> agora:</p>
+
+[code lang="javascript"]
+//...
+import { HttpClientModule } from '@angular/common/http';
+//...
+imports: [
+  //...
+  HttpClientModule
+],
+[/code]
+
+<h2>Resposta do serviço</h2>
+
+<p>Pelo fato do componente HttpClient já retornar o conteúdo da resposta em formato JSON, não precisamos nos preocupar em transformá-lo, precisamos somente retornar a propriedade "content".</p>
+
+<p>Outro detalhe é que para os métodos de <strong>HttpClient</strong>, precisaremos usar <strong>HttpHeaders</strong>, ao invés de <strong>Headers</strong>.
+  O <strong>HttpHeaders</strong> se encontra no pacote <code>@angular/common/http</code>.</p>
+
+<p>Ainda em relação ao <strong>HttpHeaders</strong>, note que devemos atribuir à variável <code>headers</code> o retorno do método
+  <code>append</code>, pois o mesmo retorna uma cópia dos headers ao invés de alterar o objeto original.</p>
+
+[code lang="javascript"]
+pesquisar(): Promise&#x3C;any&#x3E; {
+  const headers = new HttpHeaders()
+    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+  return this.http.get(`${this.lancamentosUrl}?resumo`, { headers })
+    .toPromise()
+    .then(response => response['content']);
+}
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/17.2-criando-o-servico-de-consulta-de-lancamentos-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

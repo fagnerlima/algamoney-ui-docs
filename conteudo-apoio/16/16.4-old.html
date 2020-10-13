@@ -1,0 +1,21 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2> Retorno da requisição </h2>
+
+    <p> Como visto na aula anterior, os métodos de requisição do HttpClient não precisam de parse para JSON, mantendo a implementação mais simples: </p>
+
+[code lang="javascript"]
+adicionar(cidade: any): Promise&#x3C;any&#x3E; {
+    return this.http.post('http://localhost:3000/cidades', cidade)
+      .toPromise();
+}
+[/code]

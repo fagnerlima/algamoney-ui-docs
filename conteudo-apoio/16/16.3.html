@@ -1,0 +1,63 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Gerando o serviço</h2>
+
+<p>Como mencionado anteriormente, para não criarmos o arquivo de testes usamos o parâmetro <code>--skipTests</code>.</p>
+
+<code>
+ng g s cidade --skipTests
+</code>
+
+<h2>Importando módulo HttpClient</h2>
+
+<p>Utilizaremos o módulo <strong>HttpClient</strong> para realizarmos nossas requisições, pois o <strong>HttpModule</strong> já está depreciado desde a versão 4 do Angular.
+  Na versão 8 ele foi removido definitivamente, sendo substituído pelo módulo que iremos demonstrar agora.</p>
+
+<p>No arquivo <strong>app.module.ts</strong>, iremos importar o <strong>HttpClientModule</strong>:</p>
+
+[code lang="javascript"]
+import { HttpClientModule } from '@angular/common/http';
+[/code]
+
+<p>E declaramos o mesmo no nosso array de imports:</p>
+
+[code lang="javascript"]
+imports: [
+    // ...
+    HttpClientModule
+]
+[/code]
+
+<h2>toPromise</h2>
+
+<p>Como mostrado na aula, foi preciso importar o operador <code>toPromise</code> do <strong>rxjs</strong>. Agora isso já não é mais necessário</p>
+
+<h2>Retorno do HttpClient</h2>
+
+<p>Usando o <strong>HttpModule</strong>, era necessário fazer o parse para json manualmente para termos acesso ao corpo da resposta.
+  Com o <strong>HttpClient</strong> isso não é mais necessário, pois ele já nos retorna o corpo em formato JSON.
+  Precisamos então apenas realizar a chamada:</p>
+
+[code lang="javascript"]
+consultar(): Promise&#x3C;any&#x3E; {
+    return this.http.get('http://localhost:3000/cidades')
+      .toPromise();
+}
+[/code]
+
+<p>Já no arquivo <strong>app.component.ts</strong> teremos acesso direto à resposta:</p>
+
+[code lang="javascript"]
+this.cidadeService.consultar()
+    .then(cidades => {
+        this.cidades = cidades;
+    });
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/16.3-fazendo-requisicao-com-get-e-recebendo-o-retorno-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
