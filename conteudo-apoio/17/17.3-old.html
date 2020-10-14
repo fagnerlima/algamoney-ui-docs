@@ -1,0 +1,41 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2> 1. Parâmetros </h2>
+
+<p> Utilizando o componente HttpClient, a opção para enviarmos parâmetros é diferente do mostrado na aula. </p>
+<p> Ao invés de usarmos URLSearchParams, iremos utilizar HttpParams, do pacote '@angular/common/http'</p>
+<p> HttpParams é um componente imutável, o que significa que toda alteração feita em um objeto deste tipo, irá resultar em um outro objeto novo e não irá alterar a instância atual. </p>
+<p> Portanto, toda vez que chamarmos um método deste componente que deve alterar o seu estado, precisamos fazer uma nova atribuição: </p>
+
+[code lang="javascript"]
+let params = new HttpParams();
+//Precisamos atribuir o resultado do método "set" novamente à variável "params"
+params = params.set('descricao', filtro.descricao);
+[/code]
+
+<p> Nosso método ficará assim: </p>
+
+[code lang="javascript"]
+pesquisar(filtro: LancamentoFilter): Promise&#x3C;any&#x3E; {
+
+    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    let params = new HttpParams();
+
+    if (filtro.descricao) {
+        params = params.set('descricao', filtro.descricao);
+    }
+
+    return this.http.get(`${this.lancamentosUrl}?resumo`, { headers, params })
+        .toPromise()
+        .then(response => response['content']);
+}
+[/code]

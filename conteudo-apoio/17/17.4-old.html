@@ -1,0 +1,39 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2> 1. Parâmetros </h2>
+
+<p> Como vimos na aula anterior, HttpParams é um componente imutável então precisamos reatribuir seu valor quando usarmos o método set: </p>
+
+[code lang="javascript"]
+
+if (filtro.dataVencimentoInicio) {
+    params = params.set('dataVencimentoDe', moment(filtro.dataVencimentoInicio).format('YYYY-MM-DD'));
+}
+
+if (filtro.dataVencimentoFim) {
+    params = params.set('dataVencimentoAte', moment(filtro.dataVencimentoFim).format('YYYY-MM-DD'));
+}
+[/code]
+
+<h2> 2. Mensagem na tabela sem registros </h2>
+
+<p> Na aula é demonstrado a utilização do parametro emptyMessage para customizar a mensagem que aparece em nossa tabela, quando não tiver dados para exibir. </p>
+<p> Como nessa versão estamos utilizando o componente "p-table", essa proprieade não existe, porém a forma para customizarmos é bem simples e parecida: </p>
+
+[code lang="html"]
+&#x3C;ng-template pTemplate=&#x22;emptymessage&#x22;&#x3E;
+    Nenhum lan&#xE7;amento encontrado
+&#x3C;/ng-template&#x3E;
+[/code]
+
+<p> O componente "p-table" trabalha em cima de templates, e para customizarmos essa mensagem não será diferente. </p>
+<p> Precisamos definir um template com o nome "emptymessage" (respeitando as letras minúsculas) e dentro deste template indicamos o texto que desejamos exibir.</p>

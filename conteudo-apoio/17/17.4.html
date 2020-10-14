@@ -1,0 +1,41 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Parâmetros</h2>
+
+<p> Como vimos na aula anterior, HttpParams é um objeto imutável, por isso precisamos reatribuir seu valor quando usamos o método set: </p>
+
+[code lang="javascript"]
+if (filtro.dataVencimentoInicio) {
+    params = params.set('dataVencimentoDe', moment(filtro.dataVencimentoInicio).format('YYYY-MM-DD'));
+}
+
+if (filtro.dataVencimentoFim) {
+    params = params.set('dataVencimentoAte', moment(filtro.dataVencimentoFim).format('YYYY-MM-DD'));
+}
+[/code]
+
+<h2>Mensagem na tabela sem registros </h2>
+
+<p> Na aula é demonstrada a utilização do parametro <strong>emptyMessage</strong> para customizar a mensagem que aparece em nossa tabela quando não houverem dados para exibir. </p>
+
+<p> Esta propriedade não existe no componente <strong>Table</strong>, porém a forma para customizarmos é bem simples e parecida: </p>
+
+[code lang="html"]
+&#x3C;ng-template pTemplate=&#x22;emptymessage&#x22;&#x3E;
+  <tr>
+    <td colspan="6">
+      Nenhum lançamento encontrado
+    </td>
+  </tr>
+&#x3C;/ng-template&#x3E;
+[/code]
+
+<p>Observe que foi definido o valor 6 para o <code>colspan</code>, isso porque existem 6 colunas na nossa tabela de lançamentos.</p>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/17.4-adicionando-filtro-por-datas-na-pesquisa-de-lancamentos-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

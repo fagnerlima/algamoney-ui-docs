@@ -1,0 +1,43 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Parâmetros</h2>
+
+<p>Utilizando o HttpClient, a opção para enviarmos parâmetros é diferente do mostrado na aula.
+  Ao invés de usarmos URLSearchParams, iremos utilizar HttpParams, do pacote '@angular/common/http'.</p>
+
+<p>HttpParams é um componente imutável, o que significa que toda alteração feita em um objeto deste tipo,
+  irá resultar em um novo objeto e não irá alterar a instância atual.
+  Portanto, toda vez que chamarmos um método desta classe que deve alterar o seu estado, precisamos fazer uma nova atribuição:</p>
+
+[code lang="javascript"]
+let params = new HttpParams();
+//Precisamos atribuir o resultado do método "set" novamente à variável "params"
+params = params.set('descricao', filtro.descricao);
+[/code]
+
+<p>Nosso método ficará assim:</p>
+
+[code lang="javascript"]
+pesquisar(filtro: LancamentoFilter): Promise&#x3C;any&#x3E; {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    let params = new HttpParams();
+
+    if (filtro.descricao) {
+        params = params.set('descricao', filtro.descricao);
+    }
+
+    return this.http.get(`${this.lancamentosUrl}?resumo`, { headers, params })
+        .toPromise()
+        .then(response => response['content']);
+}
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/17.3-adicionando-filtro-por-descricao-na-pesquisa-de-lancamentos-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
