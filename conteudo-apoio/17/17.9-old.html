@@ -1,0 +1,23 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2> Configuração de estilos </h2>
+
+<p> Como não temos mais o arquivo .angular-cli.json, a diferença nessa aula será que vamos inserir no novo arquivo, o "angular.json" </p>
+<p> Outro ponto, é a forma como definimos a estrutura de diretório, de forma relativa. Na versão mostrada na aula, o caminho era relativo a partir da pasta src. </p>
+<p> Agora, o caminho é relativo a partir do diretório raíz da aplicação, por isso não precisaremos utilizar "../" no início da declaração dos estilos: </p>
+
+[code lang="javascript"]
+"styles": [
+    "node_modules/ng2-toasty/style-bootstrap.css",
+    //...
+]
+[/code]

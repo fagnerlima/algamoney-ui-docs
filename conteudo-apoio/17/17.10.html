@@ -1,0 +1,25 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Ícones</h2>
+
+<p>Conforme explicado em conteúdos de apoio anteriores, os ícones que estamos utilizando agora são do <strong>PrimeIcons</strong>.
+  Sendo assim, devemos atualizar o código HTML do <strong>ConfirmDialog</strong> no arquivo "app.component.html":</p>
+
+[code lang="html"]
+<p-confirmDialog header="Confirmação" icon="pi pi-question-circle" #confirmacao>
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" label="Sim"
+      (click)="confirmacao.accept()"></button>
+    <button type="button" pButton icon="pi pi-times" label="Não"
+      (click)="confirmacao.reject()"></button>
+  </p-footer>
+</p-confirmDialog>
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/17.10-adicionando-dialogo-de-confirmacao-antes-da-exclusao-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

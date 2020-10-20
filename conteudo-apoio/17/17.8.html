@@ -1,0 +1,23 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Reiniciando a tabela</h2>
+
+<p>Por utilizarmos o componente Table nesta versão, apenas indicar o valor da propriedade first não vai gerar o resultado esperado.
+  Este componente, por outro lado, possui um método chamado "reset". Iremos usar este método para reiniciar o estado da nossa tabela.</p>
+
+[code lang="javascript"]
+excluir(lancamento: any) {
+  this.lancamentoService.excluir(lancamento.codigo)
+    .then(() => {
+      this.grid.reset();
+    });
+}
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/17.8-excluindo-lancamentos-e-o-decorador-viewchild-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

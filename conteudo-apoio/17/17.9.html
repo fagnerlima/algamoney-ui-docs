@@ -1,0 +1,85 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Incompatibilidade com ng2-toasty</h2>
+
+<p>A biblioteca <strong>ng2-toasty</strong> não é compatível com a versão 10 do Angular.
+  Por esta razão, utilizaremos o componente <strong>Toast</strong> do PrimeNG.</p>
+
+<p>Para usar o componente <strong>Toast</strong> devemos importar o <strong>ToastModule</strong> e
+  prover o <strong>MessageService</strong> do PrimeNG no nosso <strong>AppModule</strong>:</p>
+
+[code lang="typescript"]
+// ...
+
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+
+// ...
+
+@NgModule({
+  // ...
+  imports: [
+    // ...
+    ToastModule,
+    // ...
+  ],
+  providers: [
+    MessageService,
+    // ...
+  ],
+  // ...
+})
+export class AppModule { }
+[/code]
+
+<p>Em seguida adicionamos a tag HTML do componente <strong>Toast</strong> no arquivo "app.component.html":</p>
+
+[code lang="html"]
+<!-- ... -->
+<p-toast></p-toast>
+[/code]
+
+<p>Por fim, injetamos o <strong>MessageService</strong> no nosso <strong>AppComponent</strong> e adicionamos a mensagem
+  de sucesso na exclusão do lançamento:</p>
+
+[code lang="typescript"]
+// ...
+import { MessageService } from 'primeng/api';
+// ...
+
+// ...
+export class LancamentosPesquisaComponent implements OnInit {
+  // ...
+
+  constructor(
+    private lancamentoService: LancamentoService,
+    private messageService: MessageService
+  ) { }
+
+  // ...
+
+  excluir(lancamento: any) {
+    this.lancamentoService.excluir(lancamento.codigo)
+      .then(() => {
+        if (this.grid.first === 0) {
+          this.pesquisar();
+        } else {
+          this.grid.reset();
+        }
+
+        this.messageService.add({ severity: 'success', detail: 'Lançamento excluído com sucesso!' });
+      });
+  }
+}
+[/code]
+
+<p>Para maiores informações segue a documentação do componente <strong>Toast</strong> do PrimeNG:
+  <a href="https://www.primefaces.org/primeng/showcase/#/toast" target="_blank">https://www.primefaces.org/primeng/showcase/#/toast</a></p>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/17.9-adicionando-mensagem-de-sucesso-com-angular-toasty-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

@@ -1,0 +1,34 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2> 1. Mudança no decorador @ViewChild </h2>
+
+<p> Na versão 8 do Angular, foi alterado a forma como o decorador @ViewChild é avaliado. </p>
+<p> Agora é necessário especificar a propriedade static, que irá dizer ao Angular em que momento as mudanças deverão ser detectadas. </p>
+<p> No nosso caso, adicionaremos a opção static = true: </p>
+
+[code lang="javascript"]
+@ViewChild('tabela', {static: true}) grid: Table;
+[/code]
+
+<h2> 2. Reiniciando o grid </h2>
+
+<p> Por utilizarmos o componente Table nesta versão, apenas indicar o valor da propriedade first, não vai gerar o resultado esperado. </p>
+<p> Este componente, por outro lado possui um método chamado "reset". Iremos usar este método para reiniciar o estado da nossa tabela. </p>
+
+[code lang="javascript"]
+excluir(lancamento: any) {
+    this.lancamentoService.excluir(lancamento.codigo)
+      .then(() => {
+        this.grid.reset();
+      });
+}
+[/code]
