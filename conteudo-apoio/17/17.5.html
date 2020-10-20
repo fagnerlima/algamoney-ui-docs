@@ -1,0 +1,32 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2> Parâmetros </h2>
+
+<p> Como vimos na aula anterior, HttpParams é um componente imutável então precisamos reatribuir seu valor quando usarmos o método set: </p>
+
+[code lang="javascript"]
+
+params = params.set('page', filtro.pagina.toString());
+params = params.set('size', filtro.itensPorPagina.toString());
+[/code]
+
+<h2> Resposta do serviço </h2>
+
+<p> Também já vimos que o HttpClient nos retorna a resposta em formato JSON, sem a necessidade de convertermos, por isso para obtermos os lançamentos e o número total, faremos o seguinte: </p>
+
+[code lang="javascript"]
+const lancamentos = response['content']
+const resultado = {
+  lancamentos,
+  total: response['totalElements']
+}
+return resultado;
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/17.5-implementando-a-paginacao-no-servico-de-lancamentos-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

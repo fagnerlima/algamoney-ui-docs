@@ -1,0 +1,33 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2> 1. Parâmetros </h2>
+
+<p> Como vimos na aula anterior, HttpParams é um componente imutável então precisamos reatribuir seu valor quando usarmos o método set: </p>
+
+[code lang="javascript"]
+
+params = params.set('page', filtro.pagina.toString());
+params = params.set('size', filtro.itensPorPagina.toString());
+[/code]
+
+<h2> 2. Resposta do serviço </h2>
+
+<p> Também já vimos que o HttpClient nos retorna a resposta em formato JSON, sem a necessidade de convertermos, por isso para obtermos os lançamentos e o número total, faremos o seguinte: </p>
+
+[code lang="javascript"]
+const lancamentos = response['content']
+const resultado = {
+  lancamentos,
+  total: response['totalElements']
+}
+return resultado;
+[/code]
