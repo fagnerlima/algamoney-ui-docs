@@ -1,0 +1,32 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2> Configurando locale </h2>
+
+<p> Para configurarmos o Locale de nossa aplicação Angular, ficou um pouco diferente, precisando de algumas configurações extras. </p>
+<p> O pacote de locale que é carregado por padrão é apenas o americano (en-US), e para usarmos um locale diferente desse, precisamos carregá-lo em nossa aplicação. </p>
+<p> Para isso, precisaremos registrar o locale desejado. </p>
+<p> Primeiro, precisamos importar este pacote e também a função que realizará o registro: </p>
+
+[code lang="javascript"]
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+[/code]
+
+<p> Depois de importados, basta registrar este pacote no início da nossa classe: </p>
+
+[code lang="javascript"]
+registerLocaleData(localePt);
+
+@NgModule({
+    //...
+})
+export class AppModule {}
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/17.11-alterando-o-locale-da-aplicacao-para-pt-br-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

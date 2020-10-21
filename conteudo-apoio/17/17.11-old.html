@@ -1,0 +1,33 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2> Configurando locale </h2>
+
+<p> Para configurarmos o Locale de nossa aplicação Angular, ficou um pouco diferente, precisando de algumas configurações extras. </p>
+<p> O pacote de locale que é carregado por padrão é apenas o americano (en-US), e para usarmos um locale diferente desse, precisamos carregá-lo em nossa aplicação. </p>
+<p> Para isso, precisaremos registrar o locale desejado. </p>
+<p> Primeiro, precisamos importar este pacote e também a função que realizará o registro: </p>
+
+[code lang="javascript"]
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+[/code]
+
+<p> Depois de importados, basta registrar este pacote no início da nossa classe: </p>
+
+[code lang="javascript"]
+registerLocaleData(localePt);
+
+@NgModule({
+    //...
+})
+export class AppModule {}
+[/code]

@@ -1,0 +1,57 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>HttpErrorResponse</h2>
+
+<p>A única alteração no código desta aula é no método <code>handle</code> de <strong>ErrorHandlerService</strong>.
+  Na segunda condição, ao invés de verificarmos se <code>errorResponse instanceof Response</code>, checamos se
+  <code>errorResponse instanceof HttpErrorResponse</code>. Além disso o método <code>json()</code> não existe nesse objeto. Podemos
+  acessar a mensagem para o usuário da seguinte forma:</p>
+
+[code lang="typescript"]
+errorResponse.error[0].mensagemUsuario
+[/code]
+
+<p>Segue o código completo do método:</p>
+
+[code lang="typescript"]
+// ...
+import { HttpErrorResponse } from '@angular/common/http';
+// ...
+
+@Injectable()
+export class ErrorHandlerService {
+  // ...
+
+  handle(errorResponse: any) {
+    let msg: string;
+
+    if (typeof errorResponse === 'string') {
+      msg = errorResponse;
+
+    } else if (errorResponse instanceof HttpErrorResponse
+        && errorResponse.status >= 400 && errorResponse.status <= 499) {
+      msg = 'Ocorreu um erro ao processar a sua solicitação';
+
+      try {
+        msg = errorResponse.error[0].mensagemUsuario;
+      } catch (e) { }
+
+      console.error('Ocorreu um erro', errorResponse);
+
+    } else {
+      msg = 'Erro ao processar serviço remoto. Tente novamente.';
+      console.error('Ocorreu um erro', errorResponse);
+    }
+
+    this.messageService.add({ severity:'error', detail: msg });
+  }
+}
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/17.14-desafio-mensagem-de-erro-de-usuario-na-exclusao-de-pessoa-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
