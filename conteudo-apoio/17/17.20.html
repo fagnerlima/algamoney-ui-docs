@@ -1,0 +1,28 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Requisição</h2>
+
+<p> Podemos utilizar tipagem no método <code>post</code> para que possamos obter a resposta diretamente como <code>Lancamento</code>: </p>
+
+[code lang="javascript"]
+adicionar(lancamento: Lancamento): Promise<Lancamento> {
+  const headers = new HttpHeaders()
+    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+    .append('Content-Type', 'application/json');
+
+  return this.http.post<Lancamento>(this.lancamentosUrl, lancamento, { headers })
+    .toPromise();
+}
+[/code]
+
+<p> Também, como visto acima, podemos enviar o objeto <code>lancamento</code> sem precisar transformá-lo em string.</p>
+
+<p> Por fim, não precisamos também converter a resposta utilizando o metodo "json()"</p>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/17.20-implementando-o-servico-de-cadastro-de-lancamentos-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
