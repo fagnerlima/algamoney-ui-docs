@@ -1,0 +1,55 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2> 1. Configurações Angular-JWT </h2>
+
+<p> Nessa versão da biblioteca de JWT, a integração com o componente HttpClient se dá de forma muito transparente, não sendo necessário utilizarmos mais o Wrapper citado na aula. </p>
+<p> Porém, precisamos especificar de onde será obtido o valor do nosso token, mesmo que estivermos seguindo o padrão de salvá-lo no localStorage como "token". </p>
+<p> Para isso, precisaremos, no seguranca.module.ts, adicionar algumas configurações (das que já inicamos em aulas anteriores) </p>
+
+<h3> Declarar uma função para obter o token: </h3>
+
+<p> Definimos, no início do nosso arquivo de módulo, uma função que irá retornar o token, ela não recebe argumentos e retorna uma string: </p>
+
+[code lang="javascript"]
+export function tokenGetter(): string {
+    return localStorage.getItem('token');
+}
+[/code]
+
+<p> Agora declaramos esta função, nas propriedades de configuração do JwtModule: </p>
+
+[code lang="javascript"]
+JwtModule.forRoot({
+    config: {
+      tokenGetter: tokenGetter
+    }
+})
+[/code]
+
+<h3> Quais URLs interceptar? </h3>
+
+<p> Para que funcione a interceptação das requisições, e para que seja adicionado o token nos Headers, precisamos informar quais URLs devemos intereceptar, e quais devemos ignorar. </p>
+
+<p> Nossa configuração ficará assim: </p>
+
+[code lang="javascript"]
+JwtModule.forRoot({
+    config: {
+      tokenGetter: tokenGetter,
+      whitelistedDomains: ['localhost:8080'],
+      blacklistedRoutes: ['http://localhost:8080/oauth/token']
+    }
+  })
+[/code]
+
+<p> Com isso, indicamos que no domínio "localhost:8080", todas as requisições serão interceptadas e o token será adicionado. </p>
+<p> Já para "http://localhost:8080/oauth/token" não ocorrerá nenhuma interceptação, pois neste endpoint, não utilizamos o token armazendo, e sim a autenticação básica, como vimos em aulas anteriores.</p>

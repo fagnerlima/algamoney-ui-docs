@@ -1,0 +1,66 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Dependência angular2-jwt</h2>
+
+<p> A dependência que precisaremos instalar em nosso projeto mudou, pois a versão utilizada na aula não é compatível com o módulo HttpClient. </p>
+<p> Segue o comando de instalação:</p>
+
+[code]
+npm install --save @auth0/angular-jwt
+[/code]
+
+<h2>JwtModule e JwtHelperService</h2>
+
+<p>Precisamos também, no arquivo seguranca.module.ts, importar o JwtModule e adicionar nos providers o JwtHelperService.
+  O JwtModule requer uma configuração adicional. Segue o código:</p>
+
+[code lang="javascript"]
+// ...
+import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
+// ...
+
+@NgModule({
+  imports: [
+    // ...
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return '';
+        }
+      }
+    }),
+    // ...
+  ],
+  // ...
+  providers: [JwtHelperService]
+})
+export class SegurancaModule { }
+[/code]
+
+<h2>Utilização </h2>
+
+<p> Não há diferenças na forma de utilizar essa biblioteca, comparado com o que foi ensinado na aula, as únicas diferenças são os tipos dos nossos atributos e de onde vamos importar. </p>
+<p> Em nosso construtor, na classe AuthService, iremos receber como parametro um JwtHelperService, do pacote "@auth0/angular-jwt"</p>
+
+[code lang="javascript"]
+//...
+import { JwtHelperService } from '@auth0/angular-jwt';
+//...
+
+constructor(
+  // ...
+  private jwtHelper: JwtHelperService
+) {
+  // ...
+}
+[/code]
+
+<p> Já a forma de decodificar, e como armazenar este token, será da mesma maneira da aula. </p>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/19.5-decodificando-o-jwt-e-armazenando-no-local-storage-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

@@ -1,0 +1,54 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Configurações @auth0/angular-jwt </h2>
+
+<p> Nessa versão da biblioteca de JWT, a integração com o componente HttpClient se dá de forma muito transparente, não sendo necessário utilizarmos mais o Wrapper citado na aula. </p>
+<p> Porém, precisamos especificar de onde será obtido o valor do nosso token, mesmo que estivermos seguindo o padrão de salvá-lo no localStorage como "token". </p>
+<p> Para isso, precisaremos, no seguranca.module.ts, adicionar algumas configurações (das que já inicamos em aulas anteriores) </p>
+
+<h3> Declarar uma função para obter o token: </h3>
+
+<p> Definimos, no início do nosso arquivo de módulo, uma função que irá retornar o token, ela não recebe argumentos e retorna uma string: </p>
+
+[code lang="javascript"]
+export function tokenGetter(): string {
+  return localStorage.getItem('token');
+}
+[/code]
+
+<p> Agora declaramos esta função nas propriedades de configuração do JwtModule: </p>
+
+[code lang="javascript"]
+JwtModule.forRoot({
+  config: {
+    tokenGetter
+  }
+})
+[/code]
+
+<h3> Quais URLs interceptar? </h3>
+
+<p> Para que funcione a interceptação das requisições, e para que seja adicionado o token nos Headers, precisamos informar quais URLs devemos intereceptar, e quais devemos ignorar. </p>
+
+<p> Nossa configuração ficará assim: </p>
+
+[code lang="javascript"]
+JwtModule.forRoot({
+  config: {
+    tokenGetter,
+    allowedDomains: ['localhost:8080'],
+    disallowedRoutes: ['http://localhost:8080/oauth/token']
+  }
+})
+[/code]
+
+<p> Com isso, indicamos que no domínio "localhost:8080", todas as requisições serão interceptadas e o token será adicionado. </p>
+<p> Já para "http://localhost:8080/oauth/token" não ocorrerá nenhuma interceptação, pois neste endpoint, não utilizamos o token armazendo, e sim a autenticação básica, como vimos em aulas anteriores.</p>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/19.7-adicionando-o-access-token-nas-chamadas-http-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

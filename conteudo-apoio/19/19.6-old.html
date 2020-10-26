@@ -1,0 +1,27 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+ <h2> 1. Tratamento da resposta </h2>
+
+    <p> Na aula, vimos que para obter a propriedade erro da resposta, vinda da API, primeiro era necessário converter o objeto response para json, utilizando o método "json()" </p>
+    <p> Como com o HttpClient, não usamos o método json, precisamos obter o erro, através da propreidade "error". Ajustando o código da aula, teríamos: </p>
+
+[code lang="java"]
+.catch(response => {
+    const responseError = response.error;
+    if (response.status === 400) {
+      if (responseError.error === 'invalid_grant') {
+        return Promise.reject('Usuário ou senha inválida');
+      }
+    }
+    return Promise.reject(response);
+});
+[/code]

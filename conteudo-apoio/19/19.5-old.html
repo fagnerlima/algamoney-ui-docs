@@ -1,0 +1,60 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2> 1. Dependência Angular2-JWT </h2>
+
+<p> A dependência que precisaremos instalar em nosso projeto agora, mudou, pois a versão utilizada na aula não é compatível com o módulo HttpClient. </p>
+<p> Segue o comando de instalação:</p>
+
+[code]
+npm install @auth0/angular-jwt
+[/code]
+
+<h2> 2. JwtHelperService </h2>
+<p> Precisaremos também declarar no seção "providers" de nosso módulo (seguranca.module.ts) o seguinte serviço: </p>
+
+[code lang="javascript"]
+providers: [JwtHelperService]
+[/code]
+
+<h2> 3. JwtModule </h2>
+
+<p> Precisamos também realizar uma configuração bem simples para que o módulo possa funcionar corretamente. </p>
+<p> Também em nosso arquivo seguranca.module.ts, precisamos adicionar o seguinte código na seção "imports": </p>
+
+[code lang="javascript"]
+JwtModule.forRoot({
+    config: {
+      tokenGetter: () => {
+        return '';
+      }
+    }
+})
+[/code]
+
+<p> Pronto, agora estamos prontos para utilizar a dependência para JWT </p>
+
+<h2> 4. Utilização </h2>
+
+<p> Não há diferenças na forma de utilizar essa biblioteca, comparado com o que foi ensinado na aula, as únicas diferenças são os tipos dos nossos atributos e de onde vamos importar. </p>
+<p> Em nosso construtor, na classe AuthService, iremos receber como parametro um JwtHelperService, do pacote "@auth0/angular-jwt"</p>
+
+[code lang="javascript"]
+//...
+import { JwtHelperService } from '@auth0/angular-jwt';
+//...
+constructor(
+    private jwtHelper: JwtHelperService,
+    //..
+) { //... }
+[/code]
+
+<p> Já a forma de decodificar, e como armazenar este token, será da mesma maneira da aula. </p>
