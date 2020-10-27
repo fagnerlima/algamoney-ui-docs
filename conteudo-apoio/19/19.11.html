@@ -1,0 +1,101 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Interceptando requisições HTTP </h2>
+
+<p> Como estamos utilizando o módulo HttpClient, temos uma maior flexibilidade para realizar determinadas tarefas, e uma dessas é a interceptação. </p>
+<p> Podemos, ao invés de criar um Wrapper das chamadas, e fornecer uma nova instância do objeto http, podemos simplesmente criar uma classe que é um interceptador. </p>
+<p> Para isso, precisaremos, criar um arquivo que podemos chamar de money-http-interceptor.ts, dentro do módulo segurança. </p>
+<p> Vamos precisar injetar nosso AuthService. </p>
+
+[code lang="javascript"]
+@Injectable()
+export class MoneyHttpInterceptor {
+
+    constructor(private auth: AuthService) {}
+}
+[/code]
+
+<p> Depois, implementamos a interface HttpInterceptor do pacote '@angular/common/http' e sobrescrevemos o método intercept: </p>
+[code lang="javascript"]
+import { Injectable } from '@angular/core';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+
+import { Observable, from } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
+
+import { AuthService } from './auth.service';
+
+@Injectable()
+export class MoneyHttpInterceptor implements HttpInterceptor {
+
+  constructor(private auth: AuthService) {}
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (!req.url.includes('/oauth/token') && this.auth.isAccessTokenInvalido()) {
+      return from(this.auth.obterNovoAccessToken())
+        .pipe(
+          mergeMap(() => {
+            req = req.clone({
+              setHeaders: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+              }
+            });
+
+            return next.handle(req);
+          })
+        );
+    }
+
+    return next.handle(req);
+  }
+}
+[/code]
+
+<h3>Declarando o interceptador </h3>
+<p> Para que o interceptador seja reconhecido por nossa aplicação, precisamos declará-lo na seção de Providers. </p>
+<p> Vamos adicioná-lo no módulo segurança: </p>
+
+[code lang="javascript"]
+providers: [
+  // ...
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: MoneyHttpInterceptor,
+    multi: true
+  }
+]
+[/code]
+
+
+<h3>O que o método intercept faz? </h3>
+
+<p> Primeiramente fazemos duas validações, uma pra saber se não estamos nos referindo ao path "/oauth/token" e outra para sabermos se o nosso token está inválido. </p>
+<ul>
+    <li>
+        Se o path for /oauth/token
+        <ul>
+            <li> Neste caso, estamos fazendo uma busca por um token válido, o que significa que nosso token atual já foi invalidado. Se não validarmos o request para este path, entraremos em um loop infinito. </li>
+        </ul>
+    </li>
+    <li>
+        Se o token está inválido
+        <ul>
+            <li> Aqui checamos se nosso token está inválido, e se estiver, precisamos obter um novo, através do "/oauth/token" </li>
+        </ul>
+    </li>
+</ul>
+
+<p> Se essas duas validações passarem, precisamos obter um novo access token antes de realizarmos a chamada ao nosso backend. </p>
+<p> Utilizamos o operador "from" para que possamos transformar nossa Promise (retornada pelo método "obterNovoAccessToken") em um Observable, que é o tipo de retorno esperado pelo intercept. </p>
+<p> Utilizamos o método "pipe" do Observable que irá nos ajudar a encadear outras operações neste mesmo Observable. </p>
+<p> Dentro do método "pipe", usamos um outro operador chamadao "mergeMap", ele fará a "junção" dos dois Observable, o primeiro é o método "obterNovoAccessToken" e o segundo será o nosso retorno, que vem de "handle.next(req)" </p>
+<p> Com isso, aguardamos o retorno do método "obterNovoAccessToken" e podemos adicionar o Header Authorization, obtendo-o do localStorage. E por fim, chamamos a requisição original. </p>
+<p> Caso o token esteja válido ou se estivermos de fato fazendo uma requisição para /oauth/token, apenas redirecionamos para a requisição original. </p>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/19.11-interceptando-chamadas-http-para-tratar-a-expiracao-do-access-token-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

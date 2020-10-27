@@ -1,0 +1,21 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2> 1. Configuração do package.json </h2>
+
+<p> A única diferença que teremos nessa aula, é o nome da propriedade que o heroku utilizará para fazer o build. </p>
+<p> Na aula utilizamos a propriedade "postinstall", dessa vez precisamos apenas renomear para "heroku-postbuild"</p>
+[code lang="javascript"]
+"scripts": {
+    //...
+    "heroku-postbuild": "ng build --prod"
+  },
+[/code]

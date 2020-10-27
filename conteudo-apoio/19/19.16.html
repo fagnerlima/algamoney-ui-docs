@@ -1,0 +1,15 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Criação do método logout </h2>
+
+<p> Por termos criado um interceptador genérico para nossas requisições, podemos fazer a implementação do método logout no nosso componente auth.service, sem a necessidade de criar um novo componente para isso. </p>
+
+<p> A razão para que possamos realizar esse procedimento dessa forma é que a única URL que não será interceptada pelo nosso método é /oauth/token, logo qualquer outra URL terá um token válido. </p>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/19.16-implementando-o-logout-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

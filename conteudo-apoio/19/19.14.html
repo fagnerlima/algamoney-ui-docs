@@ -1,0 +1,27 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Onde lançar o erro </h2>
+
+<p> Como vimos anteriormente, estamos utilizando uma forma diferente de interceptar nossas requisições. A única diferença que teremos nessa aula é onde iremos incluir essa validação para lançarmos o erro. </p>
+
+[code lang="javascript"]
+return from(this.auth.obterNovoAccessToken())
+  .pipe(
+    mergeMap(() => {
+      if (this.auth.isAccessTokenInvalido()) {
+        throw new NotAuthenticatedError();
+      }
+      //...
+    })
+  );
+[/code]
+
+<p> Antes de retornarmos nosso Observable da requisição original, validamos se nosso token não é mais válido, e assim lançamos o erro. </p>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/19.14-e-se-o-refresh-token-expirar-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

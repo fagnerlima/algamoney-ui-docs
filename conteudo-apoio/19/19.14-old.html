@@ -1,0 +1,28 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2> 1. Onde lançar o erro </h2>
+
+<p> Como vimos anteriormente, estamos utilizando uma forma diferente de interceptar nossas requisições. A única diferença que teremos nessa aula é onde iremos incluir essa validação para lançarmos o erro. </p>
+
+[code lang="javascript"]
+return from(this.auth.obterNovoAccessToken())
+    .pipe(
+        mergeMap(() => {
+            if (this.auth.isAccessTokenInvalido()) {
+                throw new NotAuthenticatedError();
+            }
+            //...
+        })
+    );
+[/code]
+
+<p> Antes de retornarmos nosso Observable da requisição original, validamos se nosso token não é mais válido, e assim lançamos o erro. </p>

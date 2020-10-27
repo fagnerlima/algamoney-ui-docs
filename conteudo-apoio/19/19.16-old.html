@@ -1,0 +1,15 @@
+<h1> Nota para atualização de dependências </h1>
+<p>
+  Este documento irá te auxiliar a fazer esta aula com a versão mais recente do Angular e suas dependências.
+  Atualmente a versão mais recente do Angular é a 8.
+
+</p>
+
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2> 1. Criação do método logout </h2>
+
+<p> Por termos criado um interceptador genérico para nossas requisições, podemos fazer a implementação do método logout no nosso componente auth.service, sem a necessidade de criar um novo componente para isso. </p>
+<p> A razão para que possamos realizar esse procedimento dessa forma, é que a única URL que não será interceptada pelo nosso método é /oauth/token, logo qualquer outra URL terá um token válido. </p>

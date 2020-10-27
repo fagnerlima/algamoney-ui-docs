@@ -1,0 +1,20 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2> 1. Configuração do package.json </h2>
+
+<p> A única diferença que teremos nessa aula, é o nome da propriedade que o heroku utilizará para fazer o build. </p>
+<p> Na aula utilizamos a propriedade "postinstall", dessa vez precisamos apenas renomear para "heroku-postbuild"</p>
+[code lang="javascript"]
+"scripts": {
+  //...
+  "heroku-postbuild": "ng build --prod"
+},
+[/code]
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/20.4-fazendo-deploy-em-producao-no-heroku-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
