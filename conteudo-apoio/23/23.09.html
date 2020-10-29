@@ -1,0 +1,32 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>Requisições</h2>
+
+<p> Como já mencionado anteriormente, não utilizamos mais o AuthHttp, e sim o HttpClient.
+  Por este motivo precisamos fazer alguns ajustes com relação a requisição. </p>
+
+<p> Primeiro, a forma como enviamos os parâmetros. Não utilizaremos mais a classe UrlSearchParams.
+  O nome da propriedade também mudou. Ao invés de "search" usamos agora "params".
+  Para este fim, iremos usar a classe HttpParams, do pacote '@angular/common/http'.</p>
+
+<p> Também não vamos mais utilizar a classe "ResponseContentType", iremos especificar o valor 'blob' como string. </p>
+
+[code lang="javascript"]
+const params = new HttpParams()
+  .set('inicio', moment(inicio).format('YYYY-MM-DD'))
+  .set('fim', moment(fim).format('YYYY-MM-DD'));
+
+return this.http.get(`${this.lancamentosUrl}/relatorios/por-pessoa`,
+  { params, responseType: 'blob' })
+  .toPromise();
+[/code]
+
+<p> Mais uma vez, como o objeto response já é a representação do objeto de resposta em si, não precisamos utilizar o método "blob()"</p>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/23.09-exibindo-o-pdf-para-o-usuario-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

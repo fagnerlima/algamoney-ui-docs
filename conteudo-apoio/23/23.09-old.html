@@ -1,0 +1,37 @@
+<h1>
+  Nota para atualização de dependências
+</h1>
+<p>
+Este documento irá te auxiliar à fazer a aula, com a versão mais recente do Angular.  Atualmente a versão mais recente do Angular é a 8
+</p>
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2>
+  1. Requisições
+</h2>
+
+<p> Como já mencionado anteriormente, nas versões atuais, não utilizamos mais o AuthHttp, e sim HttpClient. </p>
+<p> Por esse motivo precisamos fazer alguns ajustes com relação a requisição. </p>
+
+<p> Primeiro, a forma como enviamos os parâmetros, não utilizaremos mais a classe UrlSearchParams. </p>
+<p> O nome da propriedade também mudou. Ao invés de "search" usamos agora "params". </p>
+<p> Para esse fim, iremos usar a classe HttpParams, do pacote '@angular/common/http' </p>
+<p> Também não vamos mais utilizar a classe ResponseContentType, iremos especificar o valor 'blob' como string. </p>
+
+[code lang="javascript"]
+//Para declarar os parâmetros
+let params = new HttpParams();
+
+params = params.set('inicio', moment(inicio).format('YYYY-MM-DD'));
+params = params.set('fim', moment(fim).format('YYYY-MM-DD'));
+
+//Para a requisição
+return this.http.get(`${this.lancamentosUrl}/relatorio/por-pessoa`,
+  { params, responseType: 'blob' })
+  .toPromise()
+  .then(response => response);
+[/code]
+
+<p> Mais uma vez, como o objeto response já é a representação do objeto de resposta em si, não precisamos utilizar o método "blob()"</p>
