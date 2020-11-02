@@ -1,0 +1,18 @@
+<h1>
+  Nota para atualização de dependências
+</h1>
+<p>
+Este documento irá te auxiliar à fazer a aula, com a versão mais recente do Angular.  Atualmente a versão mais recente do Angular é a 8
+</p>
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2>
+  1. onBeforeSend
+</h2>
+
+<p> Na versão mais atual do PrimeNG a propriedade onBeforeSend é onBeforeUpload </p>
+<p> Porém, como usamos o HttpClient, ao invés do Http, não precisaremos do método "antesUploadAnexo"</p>
+<p> Definimos já um interceptador que fará esse papel antes de todas as requisições com HttpClient. </p>
+<p> Como esse componente também o utiliza, não precisaremos adicionar esse cabeçalho da forma mostrada na aula.</p>

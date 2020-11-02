@@ -1,0 +1,24 @@
+<h1>
+  Nota para atualização de dependências
+</h1>
+<p>
+Este documento irá te auxiliar à fazer a aula, com a versão mais recente do Angular.  Atualmente a versão mais recente do Angular é a 8
+</p>
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2>
+  1. aoTerminarUploadAnexo
+</h2>
+
+<p> Na versão mais atual do PrimeNG quando passamos o objeto event para nosso método, seu tipo é diferente do mostrado na aula. </p>
+<p> O objeto que recebemos como argumento não tem a propriedade xhr. </p>
+<p> Para obtermos acesso ao objeto de response, precisamos acessar a propriedade "originalEvent" e dentro da mesma, acessamos a propriedade "body"</p>
+<p> Ficando assim: </p>
+
+[code lang="javascript"]
+const anexo = event.originalEvent.body;
+[/code]
+
+<p> Assim teremos acesso ao objeto da resposta, e o restante do código fica idêntico ao mostrado na aula.</p>

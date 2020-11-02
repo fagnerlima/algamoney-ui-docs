@@ -1,0 +1,16 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>onBeforeSend</h2>
+
+<p> Na versão 10 do PrimeNG a propriedade "onBeforeSend" é "onBeforeUpload".
+  Porém, como usamos o HttpClient, ao invés do Http, não precisaremos do método "antesUploadAnexo".
+  Já definimos um interceptador que fará esse papel antes de todas as requisições com HttpClient.
+  Como esse componente também o utiliza, não precisaremos adicionar esse cabeçalho da forma mostrada na aula.</p>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/23.19-usando-componente-fileupload-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>

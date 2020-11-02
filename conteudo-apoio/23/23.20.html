@@ -1,0 +1,21 @@
+<h1>Atualização para o Angular 10</h1>
+
+<p>Nenhuma mudança que já não tenha sido mencionada anteriormente é necessária para esta aula.</p>
+
+<h2>
+  1. aoTerminarUploadAnexo
+</h2>
+
+<p> Na versão 10 do PrimeNG, quando passamos o objeto event para nosso método, seu tipo é diferente do mostrado na aula.
+  O objeto que recebemos como argumento não tem a propriedade "xhr". </p>
+<p> Para obtermos acesso ao objeto de response, precisamos acessar a propriedade "originalEvent" e, dentro da mesma, acessamos a propriedade "body": </p>
+
+[code lang="javascript"]
+const anexo = event.originalEvent.body;
+[/code]
+
+<p> Assim teremos acesso ao objeto da resposta. O restante do código fica idêntico ao mostrado na aula.</p>
+
+<h2>Código-fonte</h2>
+
+<p><a href="https://github.com/algaworks/curso-angular-rest-spring-boot-ui/tree/master/23.20-fazendo-download-do-anexo-ng10" target="_blank">Código-fonte da aula com Angular 10</a></p>
