@@ -1,0 +1,50 @@
+<h1>
+  Nota para atualização de dependências
+</h1>
+
+<p>
+Este documento irá te auxiliar à fazer a aula, com a versão mais recente do Angular.  Atualmente a versão mais recente do Angular é a 8
+</p>
+<p>
+  Observação: Este documento é apenas para os que querem usar as versões mais recentes das dependências contidas nesta aula. Ao longo do curso iremos atualizar as dependências, mas caso queira atualizar agora, use este documento como guia.
+</p>
+
+<h2>
+  1. Requisição
+</h2>
+
+<p> Mais uma vez a diferença para essa aula ficou na requisição. </p>
+<p> Como já vimos anteriormente, a classe URLSearchParams não é mais utilizada. </p>
+<p> Usamos a classe HttpParams do pacote "@angular/common/http" </p>
+<br/>
+<p>Lembrando que, pelo fato de ser imutável, é necessário reatribuir o valor sempre que um método que altere seu estado for invocado</p>
+
+[code lang="javascript"]
+const params = new HttpParams();
+params = params.set('estado', estado)
+[/code]
+
+<p> Outro ponto também já comentado anteriormente é a questão do response. </p>
+<p> Na aula precisamos invocar o método "json()" para obter a representação da resposta. </p>
+<p> Nessa versão isso não é necessário, então podemos simplesmente repassar o response. </p>
+<p> Porém precisamos fazer o cast para retornarmos um array de cidades: </p>
+
+[code lang="javascript"]
+//...
+  .then(response => response as Cidade[]);
+//...
+[/code]
+
+<p> O último comentário se diz respeito ao nome da propriedade "search" </p>
+<p> Para a versão que estamos usando é simplesmente "params". </p>
+<p> O metodo completo para pesquisar cidades fica assim: </p>
+
+[code lang="javascript"]
+pesquisarCidades(estado): Promise<Cidade[]> {
+  const params = new HttpParams()
+  params = params.set('estado', estado);
+  return this.http.get(this.cidadesUrl, { params})
+      .toPromise()
+      .then(response => response as Cidade[]);
+}
+[/code]
