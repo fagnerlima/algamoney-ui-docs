@@ -1,6 +1,59 @@
 <h1>Atualização para o Angular 10</h1>
 
-<p>Nenhuma mudança que já não tenha sido mencionada anteriormente é necessária para esta aula.</p>
+<p>Este documento irá auxiliá-lo no uso do <strong>Angular 10</strong>.</p>
+
+<p>Observação: Este documento é apenas para os que querem utilizar o Angular na versão 10. Ao longo do curso atualizaremos as dependências, mas caso queira atualizá-las agora, use este documento como guia.</p>
+
+<h2>JwtModule</h2>
+
+<p>Os nomes dos atributos de configuração do JwtModule mudaram:</p>
+
+<ul>
+  <li><strong>whitelistedDomains</strong> mudou para <strong>allowedDomains</strong></li>
+  <li><strong>blacklistedRoutes</strong> mudou para <strong>disallowedRoutes</strong></li>
+</ul>
+
+<p>Com isso podemos ajustar também os nomes das nossas environments:</p>
+
+<p>Segue os códigos atualizados:</p>
+
+environment.ts
+[code lang="typescript"]
+export const environment = {
+  // ...
+  tokenAllowedDomains: [ /localhost:8080/ ],
+  tokenDisallowedRoutes: [/\/oauth\/token/]
+}
+[/code]
+
+environment.prod.ts
+[code lang="typescript"]
+export const environment = {
+  // ...
+  tokenAllowedDomains: [ /algamoney-api.herokuapp.com/ ],
+  tokenDisallowedRoutes: [/\/oauth\/token/]
+};
+[/code]
+
+seguranca.module.ts
+[code lang="typescript"]
+// ...
+@NgModule({
+  imports: [
+    // ...
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        allowedDomains: environment.tokenAllowedDomains,
+        disallowedRoutes: environment.tokenDisallowedRoutes
+      }
+    }),
+    // ...
+  ],
+  // ...
+})
+export class SegurancaModule { }
+[/code]
 
 <h2>Código-fonte</h2>
 
